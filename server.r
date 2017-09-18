@@ -18,12 +18,25 @@ grid.lines = 26
 shinyServer(
   function(input,output){
     filedata <- reactive({
-      inFile <- input$datafile
-      if (is.null(inFile)) return(NULL)
+      if (input$sampleFile == 1)
+        datavar <- read.csv("sample_files/longley.csv")
+      if (input$sampleFile == 2)
+        datavar <- read.csv("sample_files/winequality-red_edit.csv")
+      if (input$sampleFile == 3)
+        datavar <- read.csv("sample_files/mlr03_psy.csv")
+      if (input$sampleFile == 4)
+        datavar <- read.csv("sample_files/AirQualityUCI.csv")
+      if (input$sampleFile == 5)
+        datavar <- read.csv("sample_files/2010.csv")
+      if (input$sampleFile == 6)
       {
-        datavar <- read.csv(inFile$datapath,header = TRUE)
-        datavar
+        inFile <- input$datafile
+        if (is.null(inFile)) return(NULL)
+        {
+          datavar <- read.csv(inFile$datapath,header = TRUE)
+        }
       }
+      datavar
     })
     output$filetable <- renderDataTable({
       filedata = filedata()
@@ -178,7 +191,7 @@ shinyServer(
 
       rgl_init()
       aspect3d(1,1,1)
-      plot3d(x_plot,y_plot,z_plot,size=0.5,type='s',xlab = "Feature 1", ylab = "Prediction", zlab = "Feature 2",main="Demo")
+      plot3d(x_plot,y_plot,z_plot,size=0.5,type='s',xlab = "Feature 1", ylab = "Prediction", zlab = "Feature 2",main="Plot")
     })
     output$regressionPlot <- renderWebGL({
       df = filedata()
