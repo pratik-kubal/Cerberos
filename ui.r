@@ -127,7 +127,10 @@ shinyUI(navbarPage("Cerberos",
                               sidebarPanel("",
                                            titlePanel("Contact"),
                                            helpText("Pratik Kubal"),
-                                           helpText("Email: pratik.p.kubal@gmail.com"))
+                                           helpText("Email: pratik.p.kubal@gmail.com"),
+                                           hr(),
+                                           helpText("Akshay Bhosale"),
+                                           helpText("Email: akshay.b666@gmail.com"))
                             ))
                    )
         
